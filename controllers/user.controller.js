@@ -65,7 +65,7 @@ exports.userLogin = async (req, res) => {
                     error: "Invalid credentials"
                 });
             }
-            jwt.sign({ email: email }, jwtKey, (error, token) => {
+            jwt.sign({ userId : user._id }, jwtKey, (error, token) => {
                 if (error) {
                     return res.status(500).json({
                         status: "failed",

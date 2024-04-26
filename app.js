@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 
 const CONFIG = require("./config");
 const connection = require('./db');
@@ -12,6 +13,7 @@ const PORT = CONFIG.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req , res) => {
     res.status(200).send("Welcome to Task-Management-App");
