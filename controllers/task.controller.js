@@ -2,7 +2,7 @@ const Task = require('../models/task.model');
 
 exports.getAllTask = async (req, res) => {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find({userId : req.userId});
         res.status(200).json({
             status: "success",
             data: {
@@ -24,7 +24,8 @@ exports.getAllTask = async (req, res) => {
 
 exports.createTask = async (req, res) => {
     try {
-        const newTask = new Task(req.body);
+        let task = {...req.body, userId : req.userId};
+        const newTask = new Task(task);
         const response = await newTask.save();
         res.status(201).json({
             status : "success",
